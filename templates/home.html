@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction of PTSD using ECG Signals</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', sans-serif;
+            background: url("{{ url_for('static', filename='bg.avif') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.6); /* dark overlay for readability */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px ;
+            color: rgb(246, 246, 246);
+        }
+
+        .result-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgb(253, 253, 253);
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-weight: bold;
+            color: #fcfcfc;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+        }
+
+
+        .result {
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+        .stress {
+            color: #e41717; /* soft red */
+        }
+
+        .not-stress {
+            color: #1de73e; /* soft green */
+        }
+
+        .btn-custom {
+            border-radius: 25px;
+        }
+
+        .advice-box {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 5px solid #060606;
+            padding: 15px 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-align: left;
+            color: rgb(249, 249, 249);
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <h1>PREDICTION OF PTSD USING ECG SIGNALS</h1>
+        <div class="result-box text-center">
+            <h4 class="mb-3">Predicted Stress Level:</h4>
+            {% if predicted_stress == "Stress" %}
+                <p class="result stress">{{ predicted_stress }}</p>
+                <div class="advice-box">
+                    <strong>Advice:</strong> Your stress level appears high. Consider relaxation techniques like deep breathing, meditation, or consulting a mental health professional.
+                </div>
+            {% elif predicted_stress == "Not Stress" %}
+                <p class="result not-stress">{{ predicted_stress }}</p>
+                <div class="advice-box">
+                    <strong>Advice:</strong> Great job! Your stress level seems low. Keep up with healthy habits and regular self-care.
+                </div>
+            {% else %}
+                <p class="result text-danger">No result available.</p>
+            {% endif %}
+            <a href="/" class="btn btn-outline-light mt-4 btn-custom">Try Another File</a>
+        </div>
+    </div>
+</body>
+</html>
+
+
